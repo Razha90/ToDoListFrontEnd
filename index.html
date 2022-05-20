@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <img src="./images/bg-desktop-light.jpg" alt="backgorund-light" class="bg-light">
+    <img src="./images/bg-desktop-dark.jpg" alt="backgorund-light" class="bg-dark">
+    <div class="wrapper">
+        <div role="navigation" class="nav">
+            <div class="icon-light">
+                <h1>TODO</h1>
+                <img src="./images/icon-moon.svg" alt="moon" onclick="darkLight()" id="moon">
+            </div>
+            <div class="todo-in">
+                <span class="border-check"><img src="./images/icon-check.svg" alt="check-border"></span><input type="text" placeholder="Write Your List..." class="text-input">
+            </div>
+        </div>
+        <div class="shadow">
+            <div class="list-todo">
+                <div>
+                    <span></span><p>Complete online JavaScript course</p>
+                </div>
+                <div>
+                    <span></span><p>Jog around the park 3x</p>
+                </div>
+                <div>
+                    <span></span><p>10 minutes meditation</p>
+                </div>
+                <div>
+                    <span></span><p>Read for 1 hour</p>
+                </div>
+                <div>
+                    <span></span><p>Pick up groceries</p>
+                </div>
+                <div>
+                    <span></span><p>Complete Todo App on Frontend Mentor</p>
+                </div>
+            </div>
+            <div class="nav-bottom">
+                <div style="margin-right: 50px; margin-left: 15px;"><span id="score"></span> item left</div>
+                <div onclick="All()">All</div>
+                <div onclick="Active()">Active</div>
+                <div onclick="Completed()">Completed</div>
+                <div style="margin-left: 20px;" onclick="clear12()">Clear Completed</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px;">
+            Drag and Drop Get Troubled <a href="https://www.instagram.com/razhaos/">HELP Me <br>
+            <a href="https://github.com/Razha90/ToDoListFrontEnd.git">Git Hub</a></a>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
