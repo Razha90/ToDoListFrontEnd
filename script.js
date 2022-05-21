@@ -125,14 +125,15 @@ document.getElementById('score').innerHTML = myNodelist.length
 // Close Button Remove DIV
 
 var close = document.getElementsByClassName('close');
+function closeB() {
 for (let c = 0; c < close.length; c++) {
   close[c].addEventListener('click', (event, val) => {
     var a = event.currentTarget;
     var b = a.parentElement;
     b.remove();
   })
+} return;
 }
-
 function clear12() {
   for (v = 0; v < collec.length; v++) {
     collec[v].remove();
@@ -141,64 +142,63 @@ function clear12() {
 
 }
 
+myNodelist.forEach(element => {
+  element.draggable = 'true';
+  element.className = 'problem';
+});
+
+var dragSrcEl = null;
+  
+function handleDragStart(e) {
+  this.style.opacity = '0.4';
+  
+  dragSrcEl = this;
+
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/html', this.innerHTML);
+}
+
+function handleDragOver(e) {
+  if (e.preventDefault) {
+    e.preventDefault();
+  }
+
+  e.dataTransfer.dropEffect = 'move';
+  
+  return false;
+}
+
+function handleDragEnter(e) {
+  this.classList.add('over');
+}
+
+function handleDragLeave(e) {
+  this.classList.remove('over');
+}
+
+function handleDrop(e) {
+  if (e.stopPropagation) {
+    e.stopPropagation(); // stops the browser from redirecting.
+  }
+  
+  if (dragSrcEl != this) {
+    dragSrcEl.innerHTML = this.innerHTML;
+    this.innerHTML = e.dataTransfer.getData('text/html');
+  }
+  
+  return false;
+}
+
+function handleDragEnd(e) {
+  this.style.opacity = '1';
+  
+  items.forEach(function (item) {
+    item.classList.remove('over');
+  });
+}
 var dark = true ;
 // drag and drop
-document.addEventListener('keypress', (event) => {
-
-  myNodelist.forEach(element => {
-    element.draggable = 'true';
-    element.className = 'problem';
-  });
-  
-  var dragSrcEl = null;
-  
-  function handleDragStart(e) {
-    this.style.opacity = '0.4';
-    
-    dragSrcEl = this;
-  
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.innerHTML);
-  }
-  
-  function handleDragOver(e) {
-    if (e.preventDefault) {
-      e.preventDefault();
-    }
-  
-    e.dataTransfer.dropEffect = 'move';
-    
-    return false;
-  }
-  
-  function handleDragEnter(e) {
-    this.classList.add('over');
-  }
-  
-  function handleDragLeave(e) {
-    this.classList.remove('over');
-  }
-  
-  function handleDrop(e) {
-    if (e.stopPropagation) {
-      e.stopPropagation(); // stops the browser from redirecting.
-    }
-    
-    if (dragSrcEl != this) {
-      dragSrcEl.innerHTML = this.innerHTML;
-      this.innerHTML = e.dataTransfer.getData('text/html');
-    }
-    
-    return false;
-  }
-  
-  function handleDragEnd(e) {
-    this.style.opacity = '1';
-    
-    items.forEach(function (item) {
-      item.classList.remove('over');
-    });
-  }
+function dragPantat() {
   /*
    let items = document.querySelectorAll('.container .box');
 items.forEach(function(item) {
@@ -222,8 +222,39 @@ items.forEach(function(item) {
     items[g].addEventListener('dragend', handleDragEnd);
     }
   }
-  });
+};
+function dropPantat() {
+  let items = document.getElementsByClassName('problem');
 
+  for (let g = 0; g < items.length; g++) {
+    if (items[g].className == 'problem') {
+    items[g].removeEventListener('dragstart', handleDragStart);
+    items[g].removeEventListener('dragenter', handleDragEnter);
+    items[g].removeEventListener('dragover', handleDragOver);
+    items[g].removeEventListener('dragleave', handleDragLeave);
+    items[g].removeEventListener('drop', handleDrop);
+    items[g].removeEventListener('dragend', handleDragEnd);
+    }
+  }
+}
+var myDrag = true;
+var myProb =  document.getElementsByClassName('problem');
+for (let o = 0; o < myProb.length; o++) {
+  function dragS() {
+    if (myDrag == true) {
+      dragPantat();
+      document.querySelectorAll('.dragB span')[0].style.backgroundColor = 'red';
+      document.querySelectorAll('.dragB span')[0].style.left = '73px';
+      closeB();
+      myDrag= false;
+    } else {
+      dropPantat();
+      myDrag=true;
+      document.querySelectorAll('.dragB span')[0].style.backgroundColor = 'hsl(0, 1%, 66%)';
+      document.querySelectorAll('.dragB span')[0].style.left = '5px';
+    }
+  }
+}
 
 // change Color
 function darkLight() {

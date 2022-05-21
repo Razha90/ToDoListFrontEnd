@@ -156,7 +156,7 @@ body {
 
 .shadow {
     box-shadow:0 1px 10px 0px hsl(0, 1%, 66%);
-    margin-top: 50px;
+    margin-top: 30px;
 }
 .list-todo img {
     display: none;
@@ -174,4 +174,35 @@ body {
 
 .checked img {
     display: block;
+}
+
+.dragB {
+    margin: auto;
+    display: block;
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.dragB div{
+    background-color: white;
+    width: 100px;
+    height: 25px;
+    border-radius: 20px;
+}
+.dragB span {
+    width: 23px;
+    height: 23px;
+    background-color: hsl(0, 1%, 66%);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    left: 5px;
+    top: 1px;
+}
+
+.dragB p {
+    position: relative;
+    top: -12px;
+    left: 25px;
+    z-index: -1;
 }
