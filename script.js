@@ -79,9 +79,8 @@ value1.addEventListener('keypress', (keys) => {
       creDiv.appendChild(creSpa);
       creDiv.appendChild(creP);
       creDiv.appendChild(span);
+      creDiv.className = 'problem';
       creDiv.draggable = 'true';
-    
-
       document.getElementsByClassName('list-todo')[0].appendChild(creDiv);
    
     }
@@ -143,13 +142,14 @@ function clear12() {
 }
 
 var dark = true ;
-
 // drag and drop
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('keypress', (event) => {
 
   myNodelist.forEach(element => {
     element.draggable = 'true';
+    element.className = 'problem';
   });
+  
   var dragSrcEl = null;
   
   function handleDragStart(e) {
@@ -210,15 +210,17 @@ items.forEach(function(item) {
   item.addEventListener('dragend', handleDragEnd, false);
 });
    */
-  let items = document.querySelectorAll('.list-todo div');
+  let items = document.getElementsByClassName('problem');
 
   for (let g = 0; g < items.length; g++) {
-    items[g].addEventListener('dragstart', handleDragStart, false);
-    items[g].addEventListener('dragenter', handleDragEnter, false);
-    items[g].addEventListener('dragover', handleDragOver, false);
-    items[g].addEventListener('dragleave', handleDragLeave, false);
-    items[g].addEventListener('drop', handleDrop, false);
-    items[g].addEventListener('dragend', handleDragEnd, false);
+    if (items[g].className == 'problem') {
+    items[g].addEventListener('dragstart', handleDragStart);
+    items[g].addEventListener('dragenter', handleDragEnter);
+    items[g].addEventListener('dragover', handleDragOver);
+    items[g].addEventListener('dragleave', handleDragLeave);
+    items[g].addEventListener('drop', handleDrop);
+    items[g].addEventListener('dragend', handleDragEnd);
+    }
   }
   });
 
@@ -245,6 +247,12 @@ function darkLight() {
     document.getElementsByClassName('nav-bottom')[0].style.backgroundColor = 'hsl(233, 14%, 35%';
 
     document.getElementById('moon').src = './images/icon-sun.svg';
+
+    var prob = document.getElementsByClassName('problem');
+    for (let m = 0; m < prob.length; m++) {
+      prob[m].style.backgroundColor = 'hsl(233, 14%, 35%)';
+      prob[m].style.borderBottom = '1px solid hsl(234, 11%, 52%)';
+    }
   
   } else {
     document.getElementsByClassName('bg-light')[0].style.display = 'block';
@@ -266,6 +274,13 @@ function darkLight() {
     document.getElementsByClassName('nav-bottom')[0].style.backgroundColor = 'white';
     
     document.getElementById('moon').src ='./images/icon-moon.svg';
+
+    var prob = document.getElementsByClassName('problem');
+    for (let m = 0; m < prob.length; m++) {
+      prob[m].style.backgroundColor = 'white';
+      prob[m].style.borderBottom = '1px solid hsl(0, 0%, 85%)';
+    }
+  
   }
 
 
